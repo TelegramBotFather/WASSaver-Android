@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -136,7 +137,7 @@ fun StatusViewerScreen(
 
                 // Share button
                 ActionButton(
-                    icon = Icons.Default.Send,
+                    icon = Icons.AutoMirrored.Filled.Send,
                     label = "Share",
                     color = Color(0xFF34B7F1),
                     onClick = {
