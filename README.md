@@ -8,16 +8,17 @@ A clean, modern Android app to view, save, and repost WhatsApp & WhatsApp Busine
 
 - **WhatsApp & WA Business support** — Switch between WA and WAB status folders
 - **Media filters** — Filter by All, Photos, or Videos
-- **Grid view** — Beautiful thumbnail grid with type badges
-- **Full-screen viewer** — Swipe through statuses with image zoom and video playback
-- **Save to gallery** — One-tap save to Pictures/WASSaver
-- **Repost** — Direct repost to WhatsApp
-- **Share** — Share to any app
-- **Saved tab** — View all previously saved statuses
-- **Media tab** — Browse WhatsApp's private media folders (images & videos)
-- **Auto-save watcher** — Automatically saves new private media while app is open
-- **Direct Message** — Send WhatsApp messages to any number without saving as contact
-- **Dark/Light theme** — WhatsApp-inspired color palette with system theme support
+- **Grid view** — Thumbnail grid with photo/video type badges and save buttons
+- **Full-screen viewer** — Swipe through statuses with video playback (ExoPlayer)
+- **Save to gallery** — One-tap save to Pictures/WASSaver folder
+- **Repost to WhatsApp** — Share directly back to WhatsApp
+- **Share** — Share to any app via Android share sheet
+- **Saved tab** — Browse all previously saved statuses with filters
+- **Media tab** — Browse WhatsApp's private media folders (Images/Private & Video/Private)
+- **Background media watcher** — Polls private folders every 5 seconds while app is open, auto-saves new files
+- **Direct Message** — Open a WhatsApp chat with any phone number without saving as a contact
+- **About dialog** — App info accessible from the home screen header
+- **Dark/Light theme** — WhatsApp-inspired green color palette, follows system theme
 
 ## Tech Stack
 
