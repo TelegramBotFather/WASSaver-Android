@@ -2,6 +2,8 @@
 
 A clean, modern Android app to view, save, and repost WhatsApp & WhatsApp Business statuses.
 
+📥 **[Download Latest Release](https://github.com/PBhadoo/WASSaver-Android/releases)**
+
 ## Features
 
 - **WhatsApp & WA Business support** — Switch between WA and WAB status folders
