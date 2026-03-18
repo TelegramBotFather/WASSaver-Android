@@ -56,14 +56,6 @@ fun MainApp() {
     val viewModel: StatusViewModel = viewModel()
     var selectedTab by remember { mutableIntStateOf(0) }
 
-    // Start View Once auto-save watcher when app is active
-    DisposableEffect(Unit) {
-        viewModel.viewOnceWatcher.startWatching()
-        onDispose {
-            viewModel.viewOnceWatcher.stopWatching()
-        }
-    }
-
     // Status viewer state
     var viewerStatuses by remember { mutableStateOf<List<StatusFile>?>(null) }
     var viewerInitialIndex by remember { mutableIntStateOf(0) }

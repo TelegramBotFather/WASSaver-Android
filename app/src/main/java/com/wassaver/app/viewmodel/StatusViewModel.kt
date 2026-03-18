@@ -129,6 +129,7 @@ class StatusViewModel(application: Application) : AndroidViewModel(application) 
 
     fun loadStatuses() {
         viewModelScope.launch {
+            _allStatuses.value = emptyList()
             _isLoading.value = true
             val statuses = withContext(Dispatchers.IO) {
                 repository.loadStatuses(_selectedWhatsApp.value)
@@ -140,6 +141,7 @@ class StatusViewModel(application: Application) : AndroidViewModel(application) 
 
     fun loadSavedStatuses() {
         viewModelScope.launch {
+            _savedStatuses.value = emptyList()
             _isLoading.value = true
             val saved = withContext(Dispatchers.IO) {
                 repository.loadSavedStatuses()
