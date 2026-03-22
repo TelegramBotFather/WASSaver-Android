@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
@@ -46,7 +47,8 @@ import com.wassaver.app.viewmodel.StatusViewModel
 @Composable
 fun HomeScreen(
     viewModel: StatusViewModel,
-    onStatusClick: (StatusFile, Int, List<StatusFile>) -> Unit
+    onStatusClick: (StatusFile, Int, List<StatusFile>) -> Unit,
+    onBack: (() -> Unit)? = null
 ) {
     val selectedWhatsApp by viewModel.selectedWhatsApp.collectAsState()
     val selectedFilter by viewModel.selectedFilter.collectAsState()
@@ -69,8 +71,6 @@ fun HomeScreen(
         uri?.let { viewModel.onPermissionGranted(it) }
     }
 
-    var showAboutDialog by remember { mutableStateOf(false) }
-
     Column(modifier = Modifier.fillMaxSize()) {
         // ── Top App Bar ──
         Surface(
@@ -84,9 +84,19 @@ fun HomeScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .statusBarsPadding()
-                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                        .padding(horizontal = if (onBack != null) 4.dp else 16.dp, vertical = if (onBack != null) 4.dp else 12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    if (onBack != null) {
+                        IconButton(onClick = onBack) {
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = Color.White
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(4.dp))
+                    }
                     Icon(
                         imageVector = Icons.Default.SaveAlt,
                         contentDescription = null,
@@ -95,7 +105,7 @@ fun HomeScreen(
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "WASSaver",
+                        text = "Status Viewer",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -105,13 +115,6 @@ fun HomeScreen(
                         Icon(
                             Icons.Default.Refresh,
                             contentDescription = "Refresh",
-                            tint = Color.White
-                        )
-                    }
-                    IconButton(onClick = { showAboutDialog = true }) {
-                        Icon(
-                            Icons.Default.Info,
-                            contentDescription = "About",
                             tint = Color.White
                         )
                     }
@@ -247,69 +250,6 @@ fun HomeScreen(
         }
     }
 
-    // About Dialog
-    if (showAboutDialog) {
-        AlertDialog(
-            onDismissRequest = { showAboutDialog = false },
-            icon = {
-                Box(
-                    modifier = Modifier
-                        .size(56.dp)
-                        .clip(CircleShape)
-                        .background(
-                            Brush.linearGradient(
-                                colors = listOf(WhatsAppGreen, WhatsAppDarkGreen)
-                            )
-                        ),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        Icons.Default.SaveAlt,
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = Modifier.size(28.dp)
-                    )
-                }
-            },
-            title = {
-                Text(
-                    "WASSaver",
-                    fontWeight = FontWeight.Bold
-                )
-            },
-            text = {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        "WhatsApp Status Saver",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        "Version 1.0.0",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.outline
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        "Built with ❤\uFE0F by Parveen Bhadoo",
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.primary,
-                        textAlign = TextAlign.Center
-                    )
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = { showAboutDialog = false }) {
-                    Text("Close")
-                }
-            }
-        )
-    }
 }
 
 @Composable

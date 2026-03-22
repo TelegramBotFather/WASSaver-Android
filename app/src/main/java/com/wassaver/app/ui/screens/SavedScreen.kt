@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.FolderOff
 import androidx.compose.material3.*
@@ -37,7 +38,8 @@ import com.wassaver.app.viewmodel.StatusViewModel
 @Composable
 fun SavedScreen(
     viewModel: StatusViewModel,
-    onStatusClick: (StatusFile, Int, List<StatusFile>) -> Unit
+    onStatusClick: (StatusFile, Int, List<StatusFile>) -> Unit,
+    onBack: (() -> Unit)? = null
 ) {
     val savedStatuses by viewModel.savedFilteredStatuses.collectAsState()
     val savedFilter by viewModel.savedFilter.collectAsState()
@@ -90,6 +92,16 @@ fun SavedScreen(
                             color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     } else {
+                        if (onBack != null) {
+                            IconButton(onClick = onBack) {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = "Back",
+                                    tint = Color.White
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(4.dp))
+                        }
                         Icon(
                             imageVector = Icons.Default.Bookmark,
                             contentDescription = null,

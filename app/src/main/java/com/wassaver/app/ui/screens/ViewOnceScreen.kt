@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
@@ -34,7 +35,8 @@ import com.wassaver.app.viewmodel.StatusViewModel
 @Composable
 fun ViewOnceScreen(
     viewModel: StatusViewModel,
-    onStatusClick: (StatusFile, Int, List<StatusFile>) -> Unit
+    onStatusClick: (StatusFile, Int, List<StatusFile>) -> Unit,
+    onBack: (() -> Unit)? = null
 ) {
     val selectedWhatsApp by viewModel.viewOnceWhatsApp.collectAsState()
     val selectedFilter by viewModel.viewOnceFilter.collectAsState()
@@ -88,9 +90,19 @@ fun ViewOnceScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .statusBarsPadding()
-                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                        .padding(horizontal = if (onBack != null) 4.dp else 16.dp, vertical = if (onBack != null) 4.dp else 12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    if (onBack != null) {
+                        IconButton(onClick = onBack) {
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = Color.White
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(4.dp))
+                    }
                     Icon(
                         imageVector = Icons.Default.PermMedia,
                         contentDescription = null,
@@ -99,7 +111,7 @@ fun ViewOnceScreen(
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "Media",
+                        text = "Media Browser",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
